@@ -1,0 +1,27 @@
+
+importClassesFrom("graph", "graph")
+importClassesFrom("hypergraph", "Hypergraph", "Hyperedge", "DirectedHyperedge")
+importClassesFrom("Rgraphviz", "Ragraph")
+
+importFrom("graphics", "plot")
+importFrom("grid", "grobX")
+importFrom("grid", "grobY")
+importFrom("Rgraphviz", "graphDataDefaults<-")
+importFrom("Rgraphviz", "graphData<-")
+importFrom("graph", "edgeDataDefaults<-")
+importFrom("graph", "edgeData<-")
+importFrom("graph", "nodeDataDefaults<-")
+importFrom("graph", "nodeData<-")
+importFrom("Rgraphviz", "graphLayout")
+
+
+exportClasses("graphBPH", "RagraphBPH")
+
+exportMethods("graphBPH",
+              "plot",
+              "graphLayout",
+              "edgeDataDefaults<-", "edgeData<-",
+              "nodeDataDefaults<-", "nodeData<-")
+
+S3method("grobX", "node")
+S3method("grobY", "node")

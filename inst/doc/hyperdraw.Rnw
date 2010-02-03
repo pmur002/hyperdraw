@@ -1,0 +1,278 @@
+%\VignetteIndexEntry{Hyperdraw}
+%\VignetteDepends{graph}
+%\VignetteDepends{Rgraphviz}
+%\VignetteDepends{hyperdraw}
+%\VignetteKeywords{Hypergraph}
+%\VignettePackage{hyperdraw}
+\documentclass{article}
+
+\usepackage{hyperref}
+
+\textwidth=6.2in
+\textheight=8.5in
+%\parskip=.3cm
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rmethod}[1]{{\texttt{#1}}}
+
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+
+
+\newcommand{\classdef}[1]{%
+  {\em #1}
+}
+
+\SweaveOpts{keep.source = true}
+
+\bibliographystyle{plain}
+
+\begin{document}
+\title{How To use the \Rpackage{hyperdraw} package}
+
+\maketitle
+
+\section{Introduction}
+
+The \Rpackage{hyperdraw} package 
+provides a particular style of visualization
+for hypergraphs.
+
+A hypergraph differs from a normal graph in that each edge of
+a hypergraph may connect more than two nodes together (in a 
+normal graph, an edge may only connect two nodes), which can present
+some difficulties for drawing the edges of a hypergraph.  
+
+This package provides an algorithm for rendering hypergraphs.
+
+\section{Getting Started}
+
+Visualizing any sort of graph involves three steps: 
+\begin{enumerate}
+\item create a representation of the graph.
+\item arrange the graph layout.
+\item render the graph layout.
+\end{enumerate}
+
+The \Rpackage{hyperdraw} package requires a specific representation
+of a hypergraph, implemented by the \Rclass{graphBPH} class,
+which is based on the \Rclass{graphNEL} class from
+the \Rpackage{graph} package.  The hypergraph is specified as a vector
+of node names, plus a list of edges for each node, \emph{but}
+(unlike a standard \Rclass{graphNEL} graph) the nodes are 
+divided into two sets - normal nodes and {\bf edge-nodes} - 
+\emph{and} all of the edges must connect a normal node to an edge-node.
+The edges of the graph must also be ``directed''.
+
+Here is a simple example of a \Rclass{graphNEL} object that
+satisfies these criteria (an \Rpackage{Rgraphviz} rendering
+of the graph is shown to the right) ...
+
+<<echo=FALSE, results=hide>>=
+library(hyperdraw)
+
+@ 
+
+\vspace{.1in}
+\begin{minipage}{.7\textwidth}
+<<>>=
+nodes <- c(LETTERS[1:5], paste("R", 1:3, sep=""))
+testgnel <- new("graphNEL",
+                nodes=nodes,
+                edgeL=list(
+                  A=list(edges=c("R1", "R2")),
+                  B=list(edges="R2"),
+                  C=list(),
+                  D=list(edges="R3"),
+                  E=list(),
+                  R1=list(edges="B"),
+                  R2=list(edges=c("C", "D")),
+                  R3=list(edges="E")),
+                edgemode="directed")
+
+@ 
+
+\end{minipage}%
+\begin{minipage}{.3\textwidth}
+
+<<gnel, echo=FALSE, fig=TRUE, include=FALSE>>=
+plot(testgnel)
+
+@ 
+
+\includegraphics[width=2in]{hyperdraw-gnel}
+\end{minipage}
+\vspace{.1in}
+
+The following code converts this into a \Rclass{graphBPH}
+object where the normal nodes are the nodes A, B, C, D, and E and
+the edge-nodes are R1, R2, and R3.  The 
+\Robject{edgeNodePattern} argument is a regular expression
+that is used to identify edge-nodes in the graph.
+
+<<>>=
+testbph <- graphBPH(testgnel, edgeNodePattern="^R")
+
+@ 
+
+This represents a hypergraph
+with an edge that connects A to B, an edge that connects
+A \emph{and} B to C \emph{and} D, and an edge that connects
+D to E.  The edge-nodes represent the edges of the hpyergraph.
+This is referred to as a ``bipartite'' representation
+of the hypergraph.  
+
+It is also possible to produce a \Rclass{graphBPH} object from
+a \Rclass{Hypergraph} object (from the \Rpackage{hypergraph} package).
+The following code demonstrates the \Rclass{Hypergraph} version
+of the simple \Rclass{graphBPH} example that we are working with
+(note that the hyperedges of the \Rclass{Hypergraph} must all
+be \Rclass{DirectedHyperedge} objects).
+
+<<>>=
+dh1 <- DirectedHyperedge("A", "B", "R1")
+dh2 <- DirectedHyperedge(c("A", "B"), c("C", "D"), "R2")
+dh3 <- DirectedHyperedge("D", "E", "R3")
+hg <- Hypergraph(LETTERS[1:5], list(dh1, dh2, dh3))
+hgbph <- graphBPH(hg)
+
+@ 
+
+The layout and rendering of the hypergraph can be performed in a single
+step as follows (result shown beside the code) ...
+
+\vspace{.1in}
+\begin{minipage}{.7\textwidth}
+<<bph, fig=true, include=FALSE, width=3, height=3>>=
+plot(testbph)
+
+@ 
+\end{minipage}%
+\begin{minipage}{.3\textwidth}
+\includegraphics[width=2in]{hyperdraw-bph}
+\end{minipage}
+\vspace{.1in}
+
+Alternatively, the graph can be laid out as a separate step,
+as in the following code ...
+
+<<>>=
+testrabph <- graphLayout(testbph)
+
+@ 
+... which is useful if you want to specify details about how
+the graph is to be rendered before the rendering step, as 
+in the following code (some edges are made thicker and red
+and the nodes are made bigger and box-shaped) ...
+
+\vspace{.1in}
+\begin{minipage}{.7\textwidth}
+<<rabph, fig=true, include=FALSE, width=3, height=3>>=
+edgeDataDefaults(testrabph, "lwd") <- 1
+edgeData(testrabph, c("A", "R1"), 
+                    c("R1", "B"), "lwd") <- c("5", "3")
+edgeDataDefaults(testrabph, "color") <- "black"
+edgeData(testrabph, c("A", "R1"), 
+                    c("R1", "B"), "color") <- "red"
+nodeDataDefaults(testrabph, "margin") <- 'unit(3, "mm")'
+nodeDataDefaults(testrabph, "shape") <- "box"
+plot(testrabph)
+
+
+@ 
+\end{minipage}%
+\begin{minipage}{.3\textwidth}
+\includegraphics[width=2in]{hyperdraw-rabph}
+\end{minipage}
+\vspace{.1in}
+
+This two-step approach demonstrates the second class that is
+provided by the \Rpackage{hyperdraw} package:  the
+\Rclass{RagraphBPH} class for a laid out hypergraph.
+
+\section{Attributes affecting rendering}
+
+As demonstrated in the previous example, it is possible to set
+attributes on edges, or nodes, or even the whole graph, in order
+to modify the default appearance of the rendered graph.
+
+The functions \Rfunction{nodeData()}, \Rfunction{edgeData()},
+and \Rfunction{graphData()} can be used to set these attributes.
+
+Some attributes are provided by the \Rpackage{Rgraphviz} package
+(e.g., the \Rfunction{edgeDataDefaults()} function shows the 
+default edge attributes).
+
+The following extra attributes are supported 
+by the \Rpackage{hyperdraw} package:
+
+\begin{description}
+\item[arrowLoc] A whole-graph attribute that controls
+where arrows are drawn on the hypergraph edges. ``middle''
+draws arrows at the edge nodes (in the middle of the curves),
+``end'' draws arrows at the end of edges, and ``none'' produces no
+arrows.
+\item[margin] A node attribute that controls the amount of
+space around the label within a node.  This should be a
+character value that evaluates to a grid \Robject{unit} object.
+\item[lwd] An edge attribute that controls the width
+of the edge.
+\end{description}
+
+In addition, \Rpackage{hyperdraw} currently only supports the values
+``circle'', ``box'', and ``plain'' for the \Robject{shape}
+attribute.
+
+\section{The algorithm}
+
+The algorithm for rendering a hypergraph that is
+implemented in this package is roughly as follows:
+
+\begin{itemize}
+\item represent the hypergraph in bipartite form as a \Rclass{graphNEL}
+object.
+\item use the graphviz software (via the 
+\Rpackage{Rgraphviz} package) to lay out the \Rclass{graphNEL} object,
+\emph{ but do not use \Rpackage{Rgraphviz} to render the lay out}.
+\item render the normal nodes at the locations given by the
+graphviz layout.
+\item for each edge-node, determine the average angle at which
+the graph edges enter or exit the node.
+\item for each edge (between a normal node and an edge-node), 
+generate a bezier curve from the location
+of the normal node
+to the location of the edge-node, with the constraint that, where the curve
+is incident on the edge-node, it
+must be tangent to the average angle for that edge-node.  This produces
+a single smooth curve between any two normal nodes (via an edge-node).
+(The angle of the curve at the normal node depends
+on the difference between the average angle at the edge-node and
+the angle between the normal node and the edge-node.)
+\item trim the bezier curves so that they start or end at the boundary
+of the normal nodes.
+\item
+render the bezier curves, with an arrow on the end of any
+curve that ends at an edge-node.
+\item render a label ``beside'' each edge-node.
+\end{itemize}
+
+\section{Issues}
+
+The calculation and trimming of bezier curves is currently quite slow.
+There is also no automatic scaling of text done at this point.
+
+
+\nocite{graphpkg}
+\nocite{hypergraphpkg}
+\nocite{Rgraphvizpkg}
+\nocite{hypergraphs}
+\nocite{Gansner99anopen}
+\bibliography{hyperdraw}
+
+\end{document}
+
