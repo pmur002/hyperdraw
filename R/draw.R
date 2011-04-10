@@ -68,8 +68,8 @@ drawEdgeNode <- function(edgeNode, xy, edgeNodeIO) {
     # If no incoming nodes, then draw a dot
     nin <- length(edgeNodeIO$incoming[[edgeNode]])
     if (nin == 0) {
-        grid.circle(unit(xy$x[node], "native"),
-                    unit(xy$y[node], "native"),
+        grid.circle(unit(xy$x[edgeNode], "native"),
+                    unit(xy$y[edgeNode], "native"),
                     r=unit(.5, "mm"),
                     gp=gpar(fill="black"))
     }
