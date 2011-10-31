@@ -1,5 +1,5 @@
 Package:      hyperdraw
-Version: 1.5.0
+Version: 1.6.0
 Depends:      R (>= 2.9.0), methods, grid, graph, hypergraph, Rgraphviz
 SystemRequirements: graphviz
 Title:        Visualizing Hypergaphs
