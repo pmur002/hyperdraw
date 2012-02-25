@@ -1,5 +1,5 @@
 Package:      hyperdraw
-Version: 1.7.0
+Version: 1.7.1
 Depends:      R (>= 2.9.0), methods, grid, graph, hypergraph, Rgraphviz
 SystemRequirements: graphviz
 Title:        Visualizing Hypergaphs
@@ -8,5 +8,5 @@ Maintainer:   Paul Murrell <p.murrell@auckland.ac.nz>
 Description:  Functions for visualizing hypergraphs.
 License:      GPL (>= 2)
 biocViews:    GraphsAndNetworks
-Collate:      AllClasses.R affine.R draw.R graphBPH.R grid.R hypergraph.R legacy.R node.R RagraphBPH.R
+Collate:      AllClasses.R affine.R draw.R graphBPH.R grid.R hypergraph.R legacy.R node.R plot.R RagraphBPH.R
 
