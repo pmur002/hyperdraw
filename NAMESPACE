@@ -3,7 +3,7 @@ importClassesFrom("graph", "graph")
 importClassesFrom("hypergraph", "Hypergraph", "Hyperedge", "DirectedHyperedge")
 importClassesFrom("Rgraphviz", "Ragraph")
 
-importFrom("graphics", "plot")
+importFrom("stats4", "plot")
 importFrom("grid", "grobX")
 importFrom("grid", "grobY")
 importFrom("Rgraphviz", "graphDataDefaults<-")
