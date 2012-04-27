@@ -1,5 +1,5 @@
 Package:      hyperdraw
-Version: 1.9.0
+Version: 1.9.1
 Depends:      R (>= 2.9.0), methods, grid, graph, hypergraph, Rgraphviz
 Imports:      stats4
 SystemRequirements: graphviz
@@ -8,6 +8,6 @@ Author:       Paul Murrell
 Maintainer:   Paul Murrell <p.murrell@auckland.ac.nz>
 Description:  Functions for visualizing hypergraphs.
 License:      GPL (>= 2)
-biocViews:    GraphsAndNetworks
+biocViews:    NetworkVisualization, GraphsAndNetworks
 Collate:      AllClasses.R affine.R draw.R graphBPH.R grid.R hypergraph.R legacy.R node.R RagraphBPH.R
 
