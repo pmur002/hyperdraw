@@ -72,7 +72,7 @@ validGraphBPH <- function(obj) {
 # Plot method
 
 setMethod("plot",
-          signature(x="graphBPH"),
+          signature(x="graphBPH", y="ANY"),
           function(x, y, layoutType="dot", ..., newpage=TRUE) {
               # Convert the graphNEL to an Ragraph
               # and lay it out

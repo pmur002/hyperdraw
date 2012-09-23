@@ -2,7 +2,7 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{graphBPH-class}
-\alias{plot,graphBPH-method}
+\alias{plot,graphBPH,ANY-method}
 \alias{graphLayout,graphBPH,missing-method}
 \alias{graphLayout,graphBPH,character-method}
 
@@ -45,7 +45,7 @@
 }
 \section{Methods}{
   \describe{
-    \item{plot}{\code{signature(x = "graphBPH")}:
+    \item{plot}{\code{signature(x = "graphBPH", y = "ANY")}:
       draw a representation of the hypergraph where edges between
       normal nodes in the graph pass through an intermediate
       edge-node in a nice smooth curve. }

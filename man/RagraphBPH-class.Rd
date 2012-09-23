@@ -3,7 +3,7 @@
 \docType{class}
 \alias{RagraphBPH}
 \alias{RagraphBPH-class}
-\alias{plot,RagraphBPH-method}
+\alias{plot,RagraphBPH,ANY-method}
 \alias{edgeDataDefaults<-,RagraphBPH,character,ANY-method}
 \alias{edgeData<-,RagraphBPH,character,character,character,ANY-method}
 \alias{nodeDataDefaults<-,RagraphBPH,character,ANY-method}
@@ -36,7 +36,7 @@
 }
 \section{Methods}{
   \describe{
-    \item{plot}{\code{signature(x = "RagraphBPH")}:
+    \item{plot}{\code{signature(x = "RagraphBPH", y = "ANY")}:
       draw a representation of the hypergraph where edges between
       normal nodes in the graph pass through an intermediate
       edge-node in a nice smooth curve. }
