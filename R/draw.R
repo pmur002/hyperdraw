@@ -52,6 +52,10 @@ drawNode <- function(node, xy, rag) {
     if (is.na(shape)) {
         shape <- "plain"
     }
+    cex <- nodeData(rag, node, "cex")
+    if (is.na(cex)) {
+        cex <- 1
+    }
     col <- nodeData(rag, node, "color")
     if (is.na(col)) {
         col <- "black"
@@ -61,7 +65,7 @@ drawNode <- function(node, xy, rag) {
                    unit(xy$y[node], "native"),
                    shape=shape,
                    margin=margin,
-                   gp=gpar(col=col)))
+                   gp=gpar(cex=cex, col=col)))
 }
 
 drawEdgeNode <- function(edgeNode, xy, edgeNodeIO) {
