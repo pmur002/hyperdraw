@@ -215,7 +215,8 @@ by the \Rpackage{hyperdraw} package:
 \item[arrowLoc] A whole-graph attribute that controls
 where arrows are drawn on the hypergraph edges. ``middle''
 draws arrows at the edge nodes (in the middle of the curves),
-``end'' draws arrows at the end of edges, and ``none'' produces no
+``end'' draws arrows at the end of edges, ``both'' draws arrows
+at both the start and the end of edges, and ``none'' produces no
 arrows.
 \item[margin] A node attribute that controls the amount of
 space around the label within a node.  This should be a

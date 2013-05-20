@@ -11,7 +11,7 @@ setMethod("graphBPH",
               if (!all(sapply(hEdges, is, "DirectedHyperedge")))
                   stop("All hyperedges must be directed hyperedges")
               # Convert Hypergraph to graphNEL
-              hEdgeNames <- names(hEdges)
+              hEdgeNames <- hyperedgeLabels(graph)
               if (is.null(hEdgeNames)) 
                   hEdgeNames <- as.character(1:length(hEdges))
               if (any(hEdgeNames %in% nodes)) 

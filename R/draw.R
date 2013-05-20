@@ -259,12 +259,14 @@ drawHyperEdge <- function(edge, xy, edgeNodes, edgeNodeDir, rag, eps=5) {
         if (arrLoc == "middle") {
             # Arrows drawn at edgeNodes
             arr <- arrow(length=unit(1.5, "mm"), type="closed")
+        } else if (arrLoc == "both") {
+            arr <- arrow(length=unit(1.5, "mm"), type="closed", ends="first")
         } else {
             arr <- NULL
         }
     } else {
         dir <- edgeNodeDir[[start]]
-        if (arrLoc == "end") {
+        if (arrLoc == "end" || arrLoc == "both") {
             arr <- arrow(length=unit(1.5, "mm"), type="closed")
         } else {
             arr <- NULL
