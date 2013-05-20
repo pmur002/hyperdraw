@@ -8,7 +8,7 @@
     \item Node labels were ignoring the 'cex' node data value
     (reported by Hannes Hettling)    
 
-    \item Added "both" option for "arrowLoc" graph attribute
+    \item Added "start" and "both" options for "arrowLoc" graph attribute
     (which will draw arrowhead at both ends of hyper edges)
 
     \item Bug fix for converting Hypergraph to graphBPH so that
