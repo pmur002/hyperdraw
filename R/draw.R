@@ -240,8 +240,9 @@ drawCurve <- function(start, end, xy, dir, incoming, arr, rag) {
 drawEdge <- function(start, end, xy, dir, incoming, arr, rabg) {
     # If using development version of R, make use of
     # new xsplinePoints() function
-    if (as.numeric(R.version$major) >= 2 &&
-        as.numeric(R.version$minor) >= 11)
+    if (as.numeric(R.version$major) > 2 ||
+        (as.numeric(R.version$major) >= 2 &&
+         as.numeric(R.version$minor) >= 11))
         drawCurve(start, end, xy, dir, incoming, arr, rabg)
     else
         drawCurveOLD(start, end, xy, dir, incoming, arr, rabg)

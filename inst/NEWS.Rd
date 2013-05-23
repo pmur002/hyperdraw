@@ -13,7 +13,10 @@
 
     \item Bug fix for converting Hypergraph to graphBPH so that
     hyperedge names are used as edge labels
-    (reported by Hannes Hettling)    
+    (reported by Hannes Hettling)
+
+    \item Update the R version check in drawEdge() to cope properly with
+    major versions greater than 2 (!)
     
   }
 }
