@@ -23,6 +23,8 @@ stopifnot(inherits(try(graphBPH(badgnel.2, "")), "try-error"))
 
 # If it's a Hypergraph, all Hyperedges must be DirectedHyperedges
 
+require(hypergraph)
+
 badhg <- Hypergraph(c("A", "B"), list(Hyperedge(c("A", "B"))))
 stopifnot(inherits(try(graphBPH(badhg)), "try-error"))
 

@@ -1,19 +1,19 @@
 
-importClassesFrom("graph", "graph")
+import("methods")
+import("grid")
+import("graph")
+
 importClassesFrom("hypergraph", "Hypergraph", "Hyperedge", "DirectedHyperedge")
 importClassesFrom("Rgraphviz", "Ragraph")
 
 importFrom("stats4", "plot")
-importFrom("grid", "grobX")
-importFrom("grid", "grobY")
-importFrom("Rgraphviz", "graphDataDefaults<-")
-importFrom("Rgraphviz", "graphData<-")
-importFrom("graph", "edgeDataDefaults<-")
-importFrom("graph", "edgeData<-")
-importFrom("graph", "nodeDataDefaults<-")
-importFrom("graph", "nodeData<-")
-importFrom("Rgraphviz", "graphLayout")
+importFrom("Rgraphviz",
+           "agopen", "graphDataDefaults<-", "graphData<-", "graphLayout")
 
+importMethodsFrom(hypergraph, hyperedges, hyperedgeLabels)
+importMethodsFrom(Rgraphviz, bezierPoints, botLeft, boundBox,
+                  getNodeXY, getX, getY, graphData, "graphData<-",
+                  "graphDataDefaults<-", upRight)
 
 exportClasses("graphBPH", "RagraphBPH")
 
@@ -21,7 +21,8 @@ exportMethods("graphBPH",
               "plot",
               "graphLayout",
               "edgeDataDefaults<-", "edgeData<-",
-              "nodeDataDefaults<-", "nodeData<-")
+              "nodeDataDefaults<-", "nodeData<-",
+              "graphDataDefaults<-", "graphData<-")
 
 S3method("grobX", "node")
 S3method("grobY", "node")

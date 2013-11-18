@@ -38,8 +38,8 @@ bezierPoints <- function(x, y) {
     xx <- convertX(x, "inches", valueOnly=TRUE)
     yy <- convertY(y, "inches", valueOnly=TRUE)
     sp <- splinePoints(xx, yy)
-    grid:::xsplinePoints(xsplineGrob(sp$x, sp$y, default.units="inches",
-                                     shape=1, repEnds=FALSE))
+    xsplinePoints(xsplineGrob(sp$x, sp$y, default.units="inches",
+                              shape=1, repEnds=FALSE))
 }
 
 

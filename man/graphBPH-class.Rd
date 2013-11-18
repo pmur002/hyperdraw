@@ -99,6 +99,7 @@ testbph <- graphBPH(testgnel, "^R")
 plot(testbph)
 
 # A Hypergraph equivalent
+require(hypergraph)
 dh1 <- DirectedHyperedge("A", "B", "R1")
 dh2 <- DirectedHyperedge(c("A", "B"), c("C", "D"), "R2")
 dh3 <- DirectedHyperedge("D", "E", "R3")

@@ -1,7 +1,7 @@
 Package:      hyperdraw
 Version: 1.15.1
-Depends:      R (>= 2.9.0), methods, grid, graph, hypergraph, Rgraphviz
-Imports:      stats4
+Depends:      R (>= 2.9.0)
+Imports:      methods, grid, graph, hypergraph, Rgraphviz, stats4
 SystemRequirements: graphviz
 Title:        Visualizing Hypergaphs
 Author:       Paul Murrell

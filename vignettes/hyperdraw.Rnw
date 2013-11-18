@@ -135,12 +135,14 @@ of the simple \Rclass{graphBPH} example that we are working with
 be \Rclass{DirectedHyperedge} objects).
 
 <<>>=
+library(hypergraph)
+@ 
+<<>>=
 dh1 <- DirectedHyperedge("A", "B", "R1")
 dh2 <- DirectedHyperedge(c("A", "B"), c("C", "D"), "R2")
 dh3 <- DirectedHyperedge("D", "E", "R3")
 hg <- Hypergraph(LETTERS[1:5], list(dh1, dh2, dh3))
 hgbph <- graphBPH(hg)
-
 @ 
 
 The layout and rendering of the hypergraph can be performed in a single
@@ -182,8 +184,6 @@ edgeData(testrabph, c("A", "R1"),
 nodeDataDefaults(testrabph, "margin") <- 'unit(3, "mm")'
 nodeDataDefaults(testrabph, "shape") <- "box"
 plot(testrabph)
-
-
 @ 
 \end{minipage}%
 \begin{minipage}{.3\textwidth}

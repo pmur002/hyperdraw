@@ -8,6 +8,8 @@
 \alias{edgeData<-,RagraphBPH,character,character,character,ANY-method}
 \alias{nodeDataDefaults<-,RagraphBPH,character,ANY-method}
 \alias{nodeData<-,RagraphBPH,character,character,ANY-method}
+\alias{graphDataDefaults<-,RagraphBPH,character,ANY-method}
+\alias{graphData<-,RagraphBPH,character,ANY-method}
 
 \title{Class "RagraphBPH"}
 \description{The purpose of this class is to represent a
@@ -53,6 +55,12 @@
     \item{nodeData<-}{\code{signature(self = "RagraphBPH",
         n = "character", attr = "character", value = "ANY")}:
       set a specific attribute for one or more nodes. }
+    \item{graphDataDefaults<-}{\code{signature(self = "RagraphBPH",
+        attr = "character", value = "ANY")}:
+      set the default drawing attributes for the graph.}
+    \item{graphData<-}{\code{signature(self = "RagraphBPH",
+        n = "character", attr = "character", value = "ANY")}:
+      set a specific attribute for the graph. }
   }
 }
 \author{ Paul Murrell }
